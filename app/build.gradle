@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 27
@@ -9,6 +10,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //解决butterknife依赖报错的问题
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
     }
     buildTypes {
         release {
@@ -25,4 +32,22 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    //以下为自引用三方库
+    //.........................1【start】logger.....................................
+    //   地址：https://github.com/orhanobut/logger
+    implementation 'com.orhanobut:logger:2.2.0'
+    //.........................1【end】logger.....................................
+
+    //.........................2【start】butterknife.....................................
+    //   地址：https://github.com/JakeWharton/butterknife
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //.........................2【end】butterknife.....................................
+
+    //.........................3【start】ImmersionBar.....................................
+    // android 4.4以上沉浸式状态栏和沉浸式导航栏管理，包括状态栏字体颜色，一句代码轻松实现，以及对bar的其他设置
+    //   地址：implementation 'com.gyf.immersionbar:immersionbar:2.3.3-beta09'
+    implementation 'com.gyf.immersionbar:immersionbar:2.3.3-beta09'
+    //.........................3【end】ImmersionBar.....................................
 }
