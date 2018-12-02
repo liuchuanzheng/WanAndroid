@@ -50,4 +50,25 @@ dependencies {
     //   地址：implementation 'com.gyf.immersionbar:immersionbar:2.3.3-beta09'
     implementation 'com.gyf.immersionbar:immersionbar:2.3.3-beta09'
     //.........................3【end】ImmersionBar.....................................
+
+    //.........................4【start】RxAndroid.....................................
+    //   地址：https://github.com/ReactiveX/RxAndroid
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    // Because RxAndroid releases are few and far between, it is recommended you also
+    // explicitly depend on RxJava's latest version for bug fixes and new features.
+    // (see https://github.com/ReactiveX/RxJava/releases for latest 2.x.x version)
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
+    //.........................4【end】RxAndroid.....................................
+
+    //.........................5【start】RxPermissions.....................................
+    //   地址：https://github.com/tbruyelle/RxPermissions
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+    //.........................5【end】RxPermissions.....................................
+
+    //.........................6【start】腾讯Bugly.....................................
+    //   地址：https://github.com/tbruyelle/RxPermissions
+    implementation 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
+    //.........................6【end】腾讯Bugly.....................................
+
+
 }

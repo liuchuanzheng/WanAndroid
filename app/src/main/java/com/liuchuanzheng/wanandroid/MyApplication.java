@@ -6,6 +6,7 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
+import com.tencent.bugly.crashreport.CrashReport;
 
 /**
  * application
@@ -20,6 +21,11 @@ public class MyApplication extends Application {
         super.onCreate();
         myApplication = this;
         initLog();
+        initBugly();
+    }
+
+    private void initBugly() {
+        CrashReport.initCrashReport(getApplicationContext(), "a9bc076ff3", BuildConfig.DEBUG);
     }
 
     private void initLog() {
