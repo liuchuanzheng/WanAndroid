@@ -1,14 +1,17 @@
-package com.liuchuanzheng.wanandroid;
+package com.liuchuanzheng.wanandroid.modules.main;
 
 import android.Manifest;
 
-import com.liuchuanzheng.wanandroid.base.BaseActivity;
+import com.liuchuanzheng.wanandroid.R;
+import com.liuchuanzheng.wanandroid.base.BaseMVPActivity;
+import com.liuchuanzheng.wanandroid.modules.main.contracts.IContract;
+import com.liuchuanzheng.wanandroid.modules.main.presenters.MainActivityPresenter;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import io.reactivex.functions.Consumer;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseMVPActivity<IContract.main.View,MainActivityPresenter>{
 
     @Override
     protected int getLayoutId() {
@@ -41,6 +44,25 @@ public class MainActivity extends BaseActivity {
 
                     } }
             });
+    }
+
+
+    @Override
+    protected void initMVP() {
+       mView = new IContract.main.View() {
+           @Override
+           public void onGet() {
+
+           }
+
+           @Override
+           public void onComplete() {
+
+           }
+       };
+
+       mPresenter = new MainActivityPresenter(this,mView);
+       mPresenter.get();
     }
 
 

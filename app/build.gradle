@@ -74,6 +74,16 @@ dependencies {
     implementation 'com.blankj:utilcode:1.22.0'
     //.........................7【end】AndroidUtilCode.....................................
 
+    //.........................8【start】retrofit2.....................................
+    //   地址：https://github.com/Blankj/AndroidUtilCode
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    //用到okhttp
+    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+    //用到gson转换，来配合使用okhttp
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    //.........................8【end】retrofit2.....................................
+
 
 
 }
