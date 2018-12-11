@@ -13,7 +13,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitManager {
-    private static long CONNECT_TIMEOUT = 60L;
+    private static long CONNECT_TIMEOUT = 10L;
     private static long READ_TIMEOUT = 10L;
     private static long WRITE_TIMEOUT = 10L;
     //设缓存有效期为1天
@@ -39,11 +39,13 @@ public class RetrofitManager {
             synchronized (RetrofitManager.class) {
                 Cache cache = new Cache(new File(MyApplication.getInstance().getApplicationContext().getCacheDir(), "HttpCache"), 1024 * 1024 * 100);
                 if (mOkHttpClient == null) {
+
                     mOkHttpClient = new OkHttpClient.Builder()
                             .cache(cache)
                             .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                             .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                             .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
+                            .addInterceptor(new LoggingInterceptor())
                             .build();
                 }
             }
