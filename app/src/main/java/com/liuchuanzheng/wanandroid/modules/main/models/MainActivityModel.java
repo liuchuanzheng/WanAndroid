@@ -6,9 +6,8 @@ import com.liuchuanzheng.wanandroid.modules.main.presenters.MainActivityPresente
 import com.liuchuanzheng.wanandroid.net.ApiService;
 import com.liuchuanzheng.wanandroid.net.RetrofitManager;
 
-import io.reactivex.Observer;
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainActivityModel extends BaseModel<MainActivityPresenter> {
@@ -17,32 +16,13 @@ public class MainActivityModel extends BaseModel<MainActivityPresenter> {
         super(mPresenter);
 
     }
-    public void get(final PMListener<ArticleResponseBean> listener){
-        RetrofitManager.create(ApiService.class)
+
+    public Observable<ArticleResponseBean> get() {
+        Observable<ArticleResponseBean> observable = RetrofitManager.create(ApiService.class)
                 .getHomeArticles(1)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ArticleResponseBean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(ArticleResponseBean articleResponseBean) {
-                        listener.onNext(articleResponseBean);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        listener.onError(e);
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        listener.onCompleted();
-                    }
-                });
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
 
     }
 }

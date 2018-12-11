@@ -2,17 +2,19 @@ package com.liuchuanzheng.wanandroid.modules.main.presenters;
 
 import android.content.Context;
 
-import com.liuchuanzheng.wanandroid.base.mvp.model.IBaseModel;
 import com.liuchuanzheng.wanandroid.base.mvp.presenter.BasePresenter;
 import com.liuchuanzheng.wanandroid.modules.main.beans.ArticleResponseBean;
 import com.liuchuanzheng.wanandroid.modules.main.contracts.IContract;
 import com.liuchuanzheng.wanandroid.modules.main.models.MainActivityModel;
 
-public class MainActivityPresenter extends BasePresenter<IContract.main.View,MainActivityModel> implements IContract.main.Presenter {
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
+public class MainActivityPresenter extends BasePresenter<IContract.main.View, MainActivityModel> implements IContract.main.Presenter {
 
 
-    public MainActivityPresenter(Context context,IContract.main.View mView) {
-        super(context,mView);
+    public MainActivityPresenter(Context context, IContract.main.View mView) {
+        super(context, mView);
 
     }
 
@@ -23,21 +25,27 @@ public class MainActivityPresenter extends BasePresenter<IContract.main.View,Mai
 
     @Override
     public void get() {
-    mModel.get(new IBaseModel.PMListener<ArticleResponseBean>() {
-        @Override
-        public void onCompleted() {
-            mView.onComplete();
-        }
+        mModel.get()
+                .subscribe(new Observer<ArticleResponseBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-        @Override
-        public void onError(Throwable e) {
+                    }
 
-        }
+                    @Override
+                    public void onNext(ArticleResponseBean articleResponseBean) {
 
-        @Override
-        public void onNext(ArticleResponseBean responseBean) {
-            mView.onGet();
-        }
-    });
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }

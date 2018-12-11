@@ -26,6 +26,7 @@ public class RetrofitManager {
     // 避免出现 HTTP 403 Forbidden，参考：http://stackoverflow.com/questions/13670692/403-forbidden-with-java-but-not-web-browser
     private static final String AVOID_HTTP403_FORBIDDEN = "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11";
     private static volatile OkHttpClient mOkHttpClient;
+    private static volatile Retrofit retrofit;
 
 
     /**
@@ -59,11 +60,14 @@ public class RetrofitManager {
      * @return
      */
     public static <T> T create(Class<T> clazz) {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(Constant.REQUEST_BASE_URL)
-                .client(getOkHttpClient())
-                .addConverterFactory(GsonConverterFactory.create())// 添加Gson转换器
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())// 添加Rx适配器
-                .build();
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder().baseUrl(Constant.REQUEST_BASE_URL)
+                    .client(getOkHttpClient())
+                    .addConverterFactory(GsonConverterFactory.create())// 添加Gson转换器
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())// 添加Rx适配器
+                    .build();
+        }
+
         return retrofit.create(clazz);
     }
 }
