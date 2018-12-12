@@ -74,7 +74,7 @@ public abstract class BaseActivity extends AppCompatActivity implements NetWorkB
         activityStackUtil.removeActivity(this);
         unbinder.unbind();
         unregisterReceiver(netBroadcastReceiver);
-        Logger.i("注销广播："+netBroadcastReceiver);
+//        Logger.i("注销广播："+netBroadcastReceiver);
         super.onDestroy();
 
     }
@@ -85,7 +85,7 @@ public abstract class BaseActivity extends AppCompatActivity implements NetWorkB
         netBroadcastReceiver = new NetWorkBroadcastReceiver();
         //注册广播接收
         registerReceiver(netBroadcastReceiver, filter);
-        Logger.i("注册广播："+netBroadcastReceiver);
+//        Logger.i("注册广播："+netBroadcastReceiver);
 
     }
 }
