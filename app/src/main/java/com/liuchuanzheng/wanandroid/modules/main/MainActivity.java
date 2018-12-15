@@ -1,17 +1,49 @@
 package com.liuchuanzheng.wanandroid.modules.main;
 
 import android.Manifest;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.widget.FrameLayout;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.liuchuanzheng.wanandroid.R;
 import com.liuchuanzheng.wanandroid.base.BaseMVPActivity;
+import com.liuchuanzheng.wanandroid.modules.login.LoginActivity;
 import com.liuchuanzheng.wanandroid.modules.main.contracts.IContract;
 import com.liuchuanzheng.wanandroid.modules.main.presenters.MainActivityPresenter;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import io.reactivex.functions.Consumer;
 
 public class MainActivity extends BaseMVPActivity<IContract.main.View, MainActivityPresenter> {
+
+    @BindView(R.id.frame_layout)
+    FrameLayout frameLayout;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+    @BindView(R.id.main_content)
+    CoordinatorLayout mainContent;
+
+    @Override
+    protected void initMVP() {
+        mView = new IContract.main.View() {
+            @Override
+            public void onGet() {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
+        mPresenter = new MainActivityPresenter(this, mView);
+
+    }
 
     @Override
     protected int getLayoutId() {
@@ -25,7 +57,7 @@ public class MainActivity extends BaseMVPActivity<IContract.main.View, MainActiv
 
     @Override
     protected void initData() {
-        mPresenter.get();
+        // mPresenter.get();
     }
 
     @Override
@@ -54,23 +86,8 @@ public class MainActivity extends BaseMVPActivity<IContract.main.View, MainActiv
     }
 
 
-    @Override
-    protected void initMVP() {
-        mView = new IContract.main.View() {
-            @Override
-            public void onGet() {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        };
-
-        mPresenter = new MainActivityPresenter(this, mView);
-
+    @OnClick(R.id.fab)
+    public void onViewClicked() {
+        ActivityUtils.startActivity(LoginActivity.class, null);
     }
-
-
 }

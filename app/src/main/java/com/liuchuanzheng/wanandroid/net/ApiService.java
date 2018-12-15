@@ -1,9 +1,13 @@
 package com.liuchuanzheng.wanandroid.net;
 
+import com.liuchuanzheng.wanandroid.modules.login.beans.LoginResponseBean;
 import com.liuchuanzheng.wanandroid.modules.main.beans.ArticleResponseBean;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 /**
@@ -19,5 +23,12 @@ public interface ApiService {
      */
     @GET("/article/list/{page}/json")
     Observable<ArticleResponseBean> getHomeArticles(@Path("page") int page);
+
+    /**
+     * 登录
+     */
+    @POST("user/login")
+    @FormUrlEncoded
+    Observable<LoginResponseBean> login(@Field("username") String username, @Field("password") String password);
 
 }
