@@ -38,8 +38,8 @@ public abstract class BaseActivity extends AppCompatActivity implements NetWorkB
         initNetReceiver();
         initView();
         initData();
+        doYourself();
     }
-
 
     private void initStatusColor() {
         ImmersionBar.with(this)
@@ -51,6 +51,8 @@ public abstract class BaseActivity extends AppCompatActivity implements NetWorkB
     protected abstract int getLayoutId();
     protected abstract void initView();
     protected abstract void initData();
+
+    protected abstract void doYourself();
     /**
      * 初始化toolbar
      */
