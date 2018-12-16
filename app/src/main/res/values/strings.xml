@@ -64,8 +64,8 @@
     <string name="collect_fail">收藏失败</string>
     <string name="cancel_collect_success">取消收藏成功</string>
     <string name="cancel_collect_fail">取消收藏失败</string>
-    <string name="float_button">cn.white.ymc.wanandroidmaster.util.behavior.FabScrollBehavior</string>
-    <string name="bottom_bervaior">cn.white.ymc.wanandroidmaster.util.behavior.BottomNavigationBehavior</string>
+    <string name="float_button">com.liuchuanzheng.wanandroid.utils.behavior.FabScrollBehavior</string>
+    <string name="bottom_bervaior">com.liuchuanzheng.wanandroid.utils.behavior.BottomNavigationBehavior</string>
     <string name="about_content"><![CDATA[
         <p>\t\t本app接口采用弘扬大佬提供wanandroidAPI，该app 目前使用使用主要技术：Material Design + MVP + Rxjava2 + Retrofit + Glide ，包括部分第三方库：Butterknife + Agentweb + SmartRefreshLayout + FlycoTabLayout_Lib 等等...</p>
         <p>\t\t由于本人技术一般，所以有不足的地方或者bug欢迎大佬指出 地址：<a href="https://github.com/yangmingchuan/WanAndroidMaster/issues" target="_blank">https://github.com/yangmingchuan/WanAndroidMaster</a></p>

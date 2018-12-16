@@ -44,7 +44,7 @@
                     android:layout_width="26dp"
                     android:layout_height="26dp"
                     android:layout_marginLeft="20dp"
-                    android:src="@drawable/ic_account_circle_black_24dp" />
+                    app:srcCompat="@drawable/ic_account_circle_black_24dp" />
 
                 <EditText
                     android:id="@+id/et_ensure_username"
@@ -70,7 +70,7 @@
                     android:layout_width="26dp"
                     android:layout_height="26dp"
                     android:layout_marginLeft="20dp"
-                    android:src="@drawable/ic_lock_open_black_24dp" />
+                    app:srcCompat="@drawable/ic_lock_open_black_24dp" />
 
                 <EditText
                     android:id="@+id/et_ensure_password"

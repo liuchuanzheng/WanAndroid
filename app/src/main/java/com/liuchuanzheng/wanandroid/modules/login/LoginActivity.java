@@ -1,10 +1,13 @@
 package com.liuchuanzheng.wanandroid.modules.login;
 
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.liuchuanzheng.wanandroid.R;
@@ -14,8 +17,10 @@ import com.liuchuanzheng.wanandroid.base.mvp.view.IBaseView;
 import com.liuchuanzheng.wanandroid.modules.login.beans.LoginResponseBean;
 import com.liuchuanzheng.wanandroid.modules.login.contracts.IContract;
 import com.liuchuanzheng.wanandroid.modules.login.presenters.LoginActivityPresenter;
+import com.liuchuanzheng.wanandroid.modules.main.MainActivity;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -35,6 +40,8 @@ public class LoginActivity extends BaseMVPActivity<IContract.Login.View, LoginAc
     Button btnLogin;
     @BindView(R.id.tv_register)
     TextView tvRegister;
+    @BindView(R.id.toolbar_login)
+    Toolbar toolbarLogin;
     private String username, password;
 
     @Override
@@ -55,6 +62,8 @@ public class LoginActivity extends BaseMVPActivity<IContract.Login.View, LoginAc
                         SPUtils.getInstance(Constant.USERINFO).put(Constant.USERNAME, responseBean.getData().getUsername());
                         SPUtils.getInstance(Constant.USERINFO).put(Constant.PASSWORD, responseBean.getData().getPassword());
                         SPUtils.getInstance(Constant.USERINFO).put(Constant.ISLOGIN, true);
+                        ActivityUtils.startActivity(MainActivity.class, null);
+                        finish();
                         break;
                 }
 
@@ -75,7 +84,14 @@ public class LoginActivity extends BaseMVPActivity<IContract.Login.View, LoginAc
 
     @Override
     protected void initView() {
-
+        setSupportActionBar(toolbarLogin);
+        getSupportActionBar().setTitle(getString(R.string.login));
+        toolbarLogin.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -110,5 +126,12 @@ public class LoginActivity extends BaseMVPActivity<IContract.Login.View, LoginAc
             return false;
         }
         return true;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
