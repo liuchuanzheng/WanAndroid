@@ -23,8 +23,8 @@ import com.liuchuanzheng.wanandroid.modules.main.adapter.MyMainPagerAdapter;
 import com.liuchuanzheng.wanandroid.modules.main.contracts.IContract;
 import com.liuchuanzheng.wanandroid.modules.main.fragment.HomeFragment;
 import com.liuchuanzheng.wanandroid.modules.main.fragment.MineFragment;
-import com.liuchuanzheng.wanandroid.modules.main.fragment.VideoFragment;
 import com.liuchuanzheng.wanandroid.modules.main.presenters.MainActivityPresenter;
+import com.liuchuanzheng.wanandroid.modules.system.SystemFragment;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -109,7 +109,9 @@ public class MainActivity extends BaseMVPActivity<IContract.main.View, MainActiv
 
     private void initViewPager() {
         fragmentList.add(new HomeFragment());
-        fragmentList.add(new VideoFragment());
+        fragmentList.add(SystemFragment.getInstance());
+        fragmentList.add(new MineFragment());
+        fragmentList.add(new MineFragment());
         fragmentList.add(new MineFragment());
         MyMainPagerAdapter myMainPagerAdapter = new MyMainPagerAdapter(getSupportFragmentManager(), fragmentList);
         vp.setAdapter(myMainPagerAdapter);
