@@ -3,18 +3,18 @@ package com.liuchuanzheng.wanandroid.modules.system.presenters;
 import android.content.Context;
 
 import com.liuchuanzheng.wanandroid.R;
+import com.liuchuanzheng.wanandroid.base.mvp.model.BaseModel;
 import com.liuchuanzheng.wanandroid.base.mvp.presenter.BasePresenter;
 import com.liuchuanzheng.wanandroid.base.mvp.view.IBaseView;
 import com.liuchuanzheng.wanandroid.modules.system.beans.SystemListResponseBean;
 import com.liuchuanzheng.wanandroid.modules.system.contracts.IContract;
-import com.liuchuanzheng.wanandroid.modules.system.models.SystemFragmentModel;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-public class SystemFragmentPresenter extends BasePresenter<IContract.main.View, SystemFragmentModel> implements IContract.main.Presenter {
+public class SystemFragmentPresenter extends BasePresenter<IContract.main.View> implements IContract.main.Presenter {
 
-
+    BaseModel.System system_model;
     public SystemFragmentPresenter(Context context, IContract.main.View mView) {
         super(context, mView);
 
@@ -22,13 +22,13 @@ public class SystemFragmentPresenter extends BasePresenter<IContract.main.View, 
 
     @Override
     public void initModel() {
-        mModel = new SystemFragmentModel(this);
+        system_model = new BaseModel().new System();
     }
 
 
     @Override
     public void getSysTemList() {
-        mModel.getSystemList().subscribe(new Observer<SystemListResponseBean>() {
+        system_model.getSystemList().subscribe(new Observer<SystemListResponseBean>() {
             @Override
             public void onSubscribe(Disposable d) {
 
@@ -54,7 +54,7 @@ public class SystemFragmentPresenter extends BasePresenter<IContract.main.View, 
 
             @Override
             public void onComplete() {
-                mView.onComplete();
+
             }
         });
     }

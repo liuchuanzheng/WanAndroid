@@ -3,18 +3,18 @@ package com.liuchuanzheng.wanandroid.modules.login.presenters;
 import android.content.Context;
 
 import com.liuchuanzheng.wanandroid.R;
+import com.liuchuanzheng.wanandroid.base.mvp.model.BaseModel;
 import com.liuchuanzheng.wanandroid.base.mvp.presenter.BasePresenter;
 import com.liuchuanzheng.wanandroid.base.mvp.view.IBaseView;
 import com.liuchuanzheng.wanandroid.modules.login.beans.LoginResponseBean;
 import com.liuchuanzheng.wanandroid.modules.login.contracts.IContract;
-import com.liuchuanzheng.wanandroid.modules.login.models.LoginActivityModel;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-public class LoginActivityPresenter extends BasePresenter<IContract.Login.View, LoginActivityModel> implements IContract.Login.Presenter {
+public class LoginActivityPresenter extends BasePresenter<IContract.Login.View> implements IContract.Login.Presenter {
 
-
+    BaseModel.Login login_model;
     public LoginActivityPresenter(Context context, IContract.Login.View mView) {
         super(context, mView);
 
@@ -22,12 +22,12 @@ public class LoginActivityPresenter extends BasePresenter<IContract.Login.View, 
 
     @Override
     public void initModel() {
-        mModel = new LoginActivityModel(this);
+        login_model = new BaseModel().new Login();
     }
 
     @Override
     public void login(String username, String password) {
-        mModel.login(username, password).subscribe(new Observer<LoginResponseBean>() {
+        login_model.login(username, password).subscribe(new Observer<LoginResponseBean>() {
             @Override
             public void onSubscribe(Disposable d) {
 
@@ -57,5 +57,6 @@ public class LoginActivityPresenter extends BasePresenter<IContract.Login.View, 
                 mView.onComplete();
             }
         });
+
     }
 }

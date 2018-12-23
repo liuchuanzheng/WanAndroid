@@ -2,13 +2,11 @@ package com.liuchuanzheng.wanandroid.base.mvp.presenter;
 
 import android.content.Context;
 
-import com.liuchuanzheng.wanandroid.base.mvp.model.BaseModel;
 import com.liuchuanzheng.wanandroid.base.mvp.view.IBaseRetrofitView;
 
-public abstract class BasePresenter<T extends IBaseRetrofitView,K extends BaseModel> implements IBasePresenter {
+public abstract class BasePresenter<T extends IBaseRetrofitView> implements IBasePresenter {
     public Context context;
     public T mView;
-    public  K mModel;
 
     public BasePresenter(Context context,T mView) {
         this.context = context;
