@@ -8,12 +8,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.liuchuanzheng.wanandroid.R;
 import com.liuchuanzheng.wanandroid.base.BaseMVPActivity;
 import com.liuchuanzheng.wanandroid.modules.home.HomeFragment;
@@ -70,6 +72,7 @@ public class MainActivity extends BaseMVPActivity<IContract.main.View, MainActiv
     Toolbar toolBar;
     List<Fragment> fragmentList = new ArrayList<>();
     private int lastIndex = 0;
+    private long mExitTime;
 
     @Override
     protected void initMVP() {
@@ -274,6 +277,18 @@ public class MainActivity extends BaseMVPActivity<IContract.main.View, MainActiv
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((System.currentTimeMillis() - mExitTime) > 2000) {
+            ToastUtils.showShort(getString(R.string.exit_system));
+            mExitTime = System.currentTimeMillis();
+            return false;
+        } else {
+            finish();
+            return true;
         }
     }
 }
