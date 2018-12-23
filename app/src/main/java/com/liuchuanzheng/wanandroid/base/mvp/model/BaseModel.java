@@ -1,5 +1,7 @@
 package com.liuchuanzheng.wanandroid.base.mvp.model;
 
+import com.liuchuanzheng.wanandroid.modules.home.beans.BannerResponseBean;
+import com.liuchuanzheng.wanandroid.modules.home.beans.HomeArticleListReaponseBean;
 import com.liuchuanzheng.wanandroid.modules.login.beans.LoginResponseBean;
 import com.liuchuanzheng.wanandroid.modules.system.beans.SystemListResponseBean;
 import com.liuchuanzheng.wanandroid.net.ApiService;
@@ -43,6 +45,24 @@ public class BaseModel implements IBaseModel {
                     .observeOn(AndroidSchedulers.mainThread());
             return observable;
 
+        }
+    }
+
+    public class Home {
+        public Observable<HomeArticleListReaponseBean> getArticleList(int page) {
+            Observable<HomeArticleListReaponseBean> observable = RetrofitManager.create(ApiService.class)
+                    .getArticleList(page)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread());
+            return observable;
+        }
+
+        public Observable<BannerResponseBean> getBanner() {
+            Observable<BannerResponseBean> observable = RetrofitManager.create(ApiService.class)
+                    .getBanner()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread());
+            return observable;
         }
     }
 }

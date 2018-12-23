@@ -18,6 +18,7 @@ import com.liuchuanzheng.wanandroid.R;
  * 注意事项:
  */
 public abstract class BaseLoadFragment extends BaseFragment {
+    public int page = -1;//当前页数. 因为此项目接口页数都是从0开始
     /**
      * 处理页面加载中、页面加载失败、页面没数据
      */

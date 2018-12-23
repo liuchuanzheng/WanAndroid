@@ -1,7 +1,8 @@
 package com.liuchuanzheng.wanandroid.net;
 
+import com.liuchuanzheng.wanandroid.modules.home.beans.BannerResponseBean;
+import com.liuchuanzheng.wanandroid.modules.home.beans.HomeArticleListReaponseBean;
 import com.liuchuanzheng.wanandroid.modules.login.beans.LoginResponseBean;
-import com.liuchuanzheng.wanandroid.modules.main.beans.ArticleResponseBean;
 import com.liuchuanzheng.wanandroid.modules.system.beans.SystemListResponseBean;
 
 import io.reactivex.Observable;
@@ -17,15 +18,6 @@ import retrofit2.http.Path;
 
 public interface ApiService {
     /**
-     * 首页数据
-     * http://www.wanandroid.com/article/list/0/json
-     *
-     * @param page page
-     */
-    @GET("/article/list/{page}/json")
-    Observable<ArticleResponseBean> getHomeArticles(@Path("page") int page);
-
-    /**
      * 登录
      */
     @POST("user/login")
@@ -37,5 +29,17 @@ public interface ApiService {
      */
     @GET("tree/json")
     Observable<SystemListResponseBean> getSystemList();
+
+    /**
+     * 主页
+     */
+    @GET("article/list/{page}/json")
+    Observable<HomeArticleListReaponseBean> getArticleList(@Path("page") int page);
+
+    /**
+     * banner
+     */
+    @GET("banner/json")
+    Observable<BannerResponseBean> getBanner();
 
 }

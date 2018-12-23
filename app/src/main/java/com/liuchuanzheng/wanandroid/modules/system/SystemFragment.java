@@ -7,7 +7,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.liuchuanzheng.wanandroid.R;
 import com.liuchuanzheng.wanandroid.base.BaseMVPLoadFragment;
 import com.liuchuanzheng.wanandroid.base.mvp.view.IBaseView;
-import com.liuchuanzheng.wanandroid.modules.system.adapter.SystemAdapter;
+import com.liuchuanzheng.wanandroid.modules.system.adapters.SystemAdapter;
 import com.liuchuanzheng.wanandroid.modules.system.beans.SystemListResponseBean;
 import com.liuchuanzheng.wanandroid.modules.system.contracts.IContract;
 import com.liuchuanzheng.wanandroid.modules.system.presenters.SystemFragmentPresenter;
@@ -44,6 +44,7 @@ public class SystemFragment extends BaseMVPLoadFragment<IContract.main.View, Sys
                 switch (resultType) {
                     case IBaseView.NET_ERROR:
                         ToastUtils.showLong(getString(R.string.net_error));
+                        showError(getString(R.string.net_error));
                         break;
                     case IBaseView.SERVER_ERROR:
                         break;
@@ -82,5 +83,9 @@ public class SystemFragment extends BaseMVPLoadFragment<IContract.main.View, Sys
 
     public static SystemFragment getInstance() {
         return new SystemFragment();
+    }
+
+    public void scrollToTop() {
+        rvSystem.smoothScrollToPosition(0);
     }
 }

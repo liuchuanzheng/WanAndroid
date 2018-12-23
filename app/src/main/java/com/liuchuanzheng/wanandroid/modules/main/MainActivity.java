@@ -3,7 +3,6 @@ package com.liuchuanzheng.wanandroid.modules.main;
 import android.Manifest;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -15,13 +14,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ActivityUtils;
 import com.liuchuanzheng.wanandroid.R;
 import com.liuchuanzheng.wanandroid.base.BaseMVPActivity;
-import com.liuchuanzheng.wanandroid.modules.login.LoginActivity;
+import com.liuchuanzheng.wanandroid.modules.home.HomeFragment;
 import com.liuchuanzheng.wanandroid.modules.main.adapter.MyMainPagerAdapter;
 import com.liuchuanzheng.wanandroid.modules.main.contracts.IContract;
-import com.liuchuanzheng.wanandroid.modules.main.fragment.HomeFragment;
 import com.liuchuanzheng.wanandroid.modules.main.fragment.MineFragment;
 import com.liuchuanzheng.wanandroid.modules.main.presenters.MainActivityPresenter;
 import com.liuchuanzheng.wanandroid.modules.system.SystemFragment;
@@ -41,7 +38,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.functions.Consumer;
 
@@ -73,6 +69,7 @@ public class MainActivity extends BaseMVPActivity<IContract.main.View, MainActiv
     @BindView(R.id.toolBar)
     Toolbar toolBar;
     List<Fragment> fragmentList = new ArrayList<>();
+    private int lastIndex = 0;
 
     @Override
     protected void initMVP() {
@@ -108,7 +105,7 @@ public class MainActivity extends BaseMVPActivity<IContract.main.View, MainActiv
     }
 
     private void initViewPager() {
-        fragmentList.add(new HomeFragment());
+        fragmentList.add(HomeFragment.getInstance());
         fragmentList.add(SystemFragment.getInstance());
         fragmentList.add(new MineFragment());
         fragmentList.add(new MineFragment());
@@ -181,6 +178,7 @@ public class MainActivity extends BaseMVPActivity<IContract.main.View, MainActiv
                         tab_btn.setBackgroundResource(pressedResId[i]);
                         vp.setCurrentItem(index);
                         getSupportActionBar().setTitle(mTitleDataList.get(index));
+                        lastIndex = i;
                     }
 
                     @Override
@@ -255,13 +253,27 @@ public class MainActivity extends BaseMVPActivity<IContract.main.View, MainActiv
 
     @OnClick(R.id.fab)
     public void onViewClicked() {
-        ActivityUtils.startActivity(LoginActivity.class, null);
+//        ActivityUtils.startActivity(LoginActivity.class, null);
+        scrollToTop(lastIndex);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    /**
+     * 滚动置顶
+     *
+     * @param lastIndex
+     */
+    private void scrollToTop(int lastIndex) {
+        switch (lastIndex) {
+            case 0:
+                HomeFragment homeFragment = (HomeFragment) fragmentList.get(0);
+                homeFragment.scrollToTop();
+                break;
+            case 1:
+                SystemFragment systemFragment = (SystemFragment) fragmentList.get(1);
+                systemFragment.scrollToTop();
+                break;
+            default:
+                break;
+        }
     }
 }

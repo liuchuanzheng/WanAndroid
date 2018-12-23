@@ -1,4 +1,4 @@
-package com.liuchuanzheng.wanandroid.modules.system.adapter;
+package com.liuchuanzheng.wanandroid.modules.system.adapters;
 
 import android.support.annotation.Nullable;
 
