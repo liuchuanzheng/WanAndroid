@@ -143,5 +143,10 @@ dependencies {
     implementation "com.github.agrosner.dbflow:contentprovider:${dbflow_version}"
     //.........................14【end】DBFlow.....................................
 
+    //.........................15【start】AgentWeb.....................................
+    //   地址：https://github.com/Justson/AgentWeb
+    implementation  'com.just.agentweb:agentweb:4.0.2'
+    //.........................15【end】AgentWeb.....................................
+
 
 }

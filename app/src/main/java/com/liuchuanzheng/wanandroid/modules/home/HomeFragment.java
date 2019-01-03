@@ -1,7 +1,11 @@
 package com.liuchuanzheng.wanandroid.modules.home;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,9 +14,12 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.liuchuanzheng.wanandroid.R;
 import com.liuchuanzheng.wanandroid.base.BaseMVPLoadFragment;
+import com.liuchuanzheng.wanandroid.base.Constant;
 import com.liuchuanzheng.wanandroid.base.mvp.view.IBaseView;
+import com.liuchuanzheng.wanandroid.modules.home.activitys.HomeDetailAcivity;
 import com.liuchuanzheng.wanandroid.modules.home.adapters.HomeAdapter;
 import com.liuchuanzheng.wanandroid.modules.home.beans.BannerResponseBean;
 import com.liuchuanzheng.wanandroid.modules.home.beans.HomeArticleListReaponseBean;
@@ -43,7 +50,7 @@ import butterknife.Unbinder;
  * 作用:
  * 注意事项:
  */
-public class HomeFragment extends BaseMVPLoadFragment<IContract.main.View, HomeFragmentPresenter> {
+public class HomeFragment extends BaseMVPLoadFragment<IContract.main.View, HomeFragmentPresenter> implements BaseQuickAdapter.OnItemClickListener {
     @BindView(R.id.normal_view)
     SmartRefreshLayout normalView;
     Unbinder unbinder;
@@ -151,6 +158,7 @@ public class HomeFragment extends BaseMVPLoadFragment<IContract.main.View, HomeF
 
         mAdapter = new HomeAdapter(dataList);
         mAdapter.addHeaderView(bannerView);
+        mAdapter.setOnItemClickListener(this);
         rv.setAdapter(mAdapter);
         rv.setLayoutManager(new LinearLayoutManager(this.getContext()));
         mPresenter.getHomeList(0, true);
@@ -223,5 +231,21 @@ public class HomeFragment extends BaseMVPLoadFragment<IContract.main.View, HomeF
 
     public void scrollToTop() {
         rv.smoothScrollToPosition(0);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        HomeArticleListReaponseBean.DataBean.DatasBean bean = dataList.get(position);
+        Intent intent = new Intent(this.getContext(), HomeDetailAcivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constant.HOME_DETAIL_ID, bean.getId());
+        bundle.putString(Constant.HOME_DETAIL_PATH, bean.getLink());
+        bundle.putString(Constant.HOME_DETAIL_TITLE, bean.getTitle());
+        bundle.putBoolean(Constant.HOME_DETAIL_IS_COLLECT, bean.isCollect());
+        intent.putExtras(bundle);
+        // webview 和跳转的界面布局 transitionName 一定要相同
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this.getActivity(), view, getString(R.string.web_view));
+        startActivity(intent, options.toBundle());
     }
 }
