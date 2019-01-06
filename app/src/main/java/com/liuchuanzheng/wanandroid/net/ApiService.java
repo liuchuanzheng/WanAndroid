@@ -1,5 +1,7 @@
 package com.liuchuanzheng.wanandroid.net;
 
+import com.liuchuanzheng.wanandroid.modules.gzh.beans.GzhDetailResponseBean;
+import com.liuchuanzheng.wanandroid.modules.gzh.beans.TitlesResponseBean;
 import com.liuchuanzheng.wanandroid.modules.home.beans.BannerResponseBean;
 import com.liuchuanzheng.wanandroid.modules.home.beans.HomeArticleListReaponseBean;
 import com.liuchuanzheng.wanandroid.modules.login.beans.LoginResponseBean;
@@ -41,5 +43,19 @@ public interface ApiService {
      */
     @GET("banner/json")
     Observable<BannerResponseBean> getBanner();
+
+    /**
+     * 获取 微信公众号列表
+     *
+     * @return
+     */
+    @GET("/wxarticle/chapters/json")
+    Observable<TitlesResponseBean> getTitleList();
+
+    /**
+     * 获取 微信公众号详细信息列表数据
+     */
+    @GET("wxarticle/list/{id}/{page}/json")
+    Observable<GzhDetailResponseBean> getWXDetailList(@Path("page") int page, @Path("id") int id);
 
 }

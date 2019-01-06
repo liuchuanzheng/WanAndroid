@@ -1,5 +1,7 @@
 package com.liuchuanzheng.wanandroid.base.mvp.model;
 
+import com.liuchuanzheng.wanandroid.modules.gzh.beans.GzhDetailResponseBean;
+import com.liuchuanzheng.wanandroid.modules.gzh.beans.TitlesResponseBean;
 import com.liuchuanzheng.wanandroid.modules.home.beans.BannerResponseBean;
 import com.liuchuanzheng.wanandroid.modules.home.beans.HomeArticleListReaponseBean;
 import com.liuchuanzheng.wanandroid.modules.login.beans.LoginResponseBean;
@@ -63,6 +65,26 @@ public class BaseModel implements IBaseModel {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread());
             return observable;
+        }
+    }
+
+    public class Gzh {
+        public Observable<TitlesResponseBean> getTitleList() {
+            Observable<TitlesResponseBean> observable = RetrofitManager.create(ApiService.class)
+                    .getTitleList()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread());
+            return observable;
+
+        }
+
+        public Observable<GzhDetailResponseBean> getWXDetailList(int page, int id) {
+            Observable<GzhDetailResponseBean> observable = RetrofitManager.create(ApiService.class)
+                    .getWXDetailList(page, id)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread());
+            return observable;
+
         }
     }
 }

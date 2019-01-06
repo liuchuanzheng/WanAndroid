@@ -72,7 +72,7 @@ public class HomeFragment extends BaseMVPLoadFragment<IContract.main.View, HomeF
             public void onGetHomeList(HomeArticleListReaponseBean responseBean, int resultType, String errorMsg, boolean isRefresh) {
                 if (normalView != null) {
                     normalView.finishRefresh(1000);
-                    normalView.finishLoadMore();
+                    normalView.finishLoadMore(1000);
                 }
                 switch (resultType) {
                     case IBaseView.NET_ERROR:
