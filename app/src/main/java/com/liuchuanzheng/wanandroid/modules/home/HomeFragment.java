@@ -161,8 +161,7 @@ public class HomeFragment extends BaseMVPLoadFragment<IContract.main.View, HomeF
         mAdapter.setOnItemClickListener(this);
         rv.setAdapter(mAdapter);
         rv.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        mPresenter.getHomeList(0, true);
-        mPresenter.getBanner();
+
         normalView.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
@@ -176,6 +175,13 @@ public class HomeFragment extends BaseMVPLoadFragment<IContract.main.View, HomeF
                 mPresenter.getHomeList(page + 1, false);
             }
         });
+    }
+
+    @Override
+    protected void lazyLoadData() {
+        //因为viewpager会预加载.这里就是懒加载.防止不美观或数据错乱
+        mPresenter.getHomeList(0, true);
+        mPresenter.getBanner();
     }
 
     public static HomeFragment getInstance() {

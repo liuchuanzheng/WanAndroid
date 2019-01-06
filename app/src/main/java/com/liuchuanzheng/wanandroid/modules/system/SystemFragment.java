@@ -78,6 +78,11 @@ public class SystemFragment extends BaseMVPLoadFragment<IContract.main.View, Sys
         mAdapter = new SystemAdapter(dataList);
         rvSystem.setAdapter(mAdapter);
         rvSystem.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+    }
+
+    @Override
+    protected void lazyLoadData() {
         mPresenter.getSysTemList();
     }
 

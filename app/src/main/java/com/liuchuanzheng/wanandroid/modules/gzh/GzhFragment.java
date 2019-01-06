@@ -100,6 +100,11 @@ public class GzhFragment extends BaseMVPLoadFragment<IContract.main.View, GzhFra
     @Override
     protected void initYourself() {
         adapter = new GzhFragmentPagerAdapter(getChildFragmentManager(), fragmentList);
+
+    }
+
+    @Override
+    protected void lazyLoadData() {
         mPresenter.getTitleList();
     }
 

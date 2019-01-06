@@ -94,7 +94,6 @@ public class GzhDetailFragment extends BaseMVPLoadFragment<IContract.main_detail
         mAdapter = new GzhDetailFragmentAdapter(dataList);
         rvSystem.setAdapter(mAdapter);
         rvSystem.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        mPresenter.getDetail(0, id, true);
         normalView.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
@@ -107,6 +106,11 @@ public class GzhDetailFragment extends BaseMVPLoadFragment<IContract.main_detail
                 mPresenter.getDetail(page + 1, id, false);
             }
         });
+    }
+
+    @Override
+    protected void lazyLoadData() {
+        mPresenter.getDetail(0, id, true);
     }
 
     public static GzhDetailFragment getInstance(int id) {

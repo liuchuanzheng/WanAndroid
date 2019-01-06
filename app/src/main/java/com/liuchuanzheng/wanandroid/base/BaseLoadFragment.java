@@ -14,7 +14,7 @@ import com.liuchuanzheng.wanandroid.R;
  * @date 2018/12/16 0016 11:55
  * QQ:1052374416
  * 电话:18501231486
- * 作用:
+ * 作用: 增加懒加载方案.可用可不用
  * 注意事项:
  */
 public abstract class BaseLoadFragment extends BaseFragment {
@@ -36,6 +36,12 @@ public abstract class BaseLoadFragment extends BaseFragment {
     private View mEmptyView;
     private ViewGroup mNormalView;
 
+    //Fragment的View加载完毕的标记
+    private boolean isViewCreated;
+
+    //Fragment对用户可见的标记
+    private boolean isUIVisible;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,6 +53,8 @@ public abstract class BaseLoadFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         initLoadUI();
         initYourself();
+        isViewCreated = true;
+        lazyLoad();
     }
 
 
@@ -146,4 +154,30 @@ public abstract class BaseLoadFragment extends BaseFragment {
                 break;
         }
     }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        //isVisibleToUser这个boolean值表示:该Fragment的UI 用户是否可见
+        if (isVisibleToUser) {
+            isUIVisible = true;
+            lazyLoad();
+        } else {
+            isUIVisible = false;
+        }
+    }
+
+    private void lazyLoad() {
+        //这里进行双重标记判断,是因为setUserVisibleHint会多次回调,并且会在onCreateView执行前回调,必须确保onCreateView加载完毕且页面可见,才加载数据
+        if (isViewCreated && isUIVisible) {
+            lazyLoadData();
+            //数据加载完毕,恢复标记,防止重复加载
+            isViewCreated = false;
+            isUIVisible = false;
+
+        }
+    }
+
+    protected abstract void lazyLoadData();
+
 }
