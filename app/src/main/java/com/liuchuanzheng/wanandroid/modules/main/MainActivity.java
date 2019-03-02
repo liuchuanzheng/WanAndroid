@@ -116,7 +116,7 @@ public class MainActivity extends BaseMVPActivity<IContract.main.View, MainActiv
         fragmentList.add(new MineFragment());
         MyMainPagerAdapter myMainPagerAdapter = new MyMainPagerAdapter(getSupportFragmentManager(), fragmentList);
         vp.setAdapter(myMainPagerAdapter);
-        vp.setOffscreenPageLimit(0);//记数从0开始!!!
+        vp.setOffscreenPageLimit(4);//缓存4页
     }
 
     /**

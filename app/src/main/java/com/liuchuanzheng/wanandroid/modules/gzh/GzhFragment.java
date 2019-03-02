@@ -86,7 +86,7 @@ public class GzhFragment extends BaseMVPLoadFragment<IContract.main.View, GzhFra
                 viewPager.setAdapter(adapter);
                 tabLayout.setViewPager(viewPager, titles.toArray(new String[titles.size()]));
                 adapter.notifyDataSetChanged();
-                viewPager.setOffscreenPageLimit(0);//记数从0开始!!!
+                viewPager.setOffscreenPageLimit(2);
             }
         }
         showNormal();

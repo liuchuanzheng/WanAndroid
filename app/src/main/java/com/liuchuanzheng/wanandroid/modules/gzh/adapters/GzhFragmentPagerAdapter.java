@@ -36,9 +36,8 @@ public class GzhFragmentPagerAdapter extends FragmentPagerAdapter {
             return fragments.size();
         }
     }
-
     /**
-     * 获取当前显示的fragment
+     * 设置当前显示的fragment
      *
      * @param container
      * @param position
@@ -50,6 +49,9 @@ public class GzhFragmentPagerAdapter extends FragmentPagerAdapter {
         super.setPrimaryItem(container, position, object);
     }
 
+    /**
+     * 获取当前显示的fragment
+     */
     public GzhDetailFragment getCurrentFragment() {
         return fragment;
     }
