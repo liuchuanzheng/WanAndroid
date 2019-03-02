@@ -48,8 +48,9 @@ public class SplashAcivity extends BaseActivity {
                 .subscribeWith(new DisposableObserver<Long>() {
                     @Override
                     public void onNext(Long aLong) {
-                        ActivityUtils.startActivity(MainActivity.class, null);
                         finish();
+                        ActivityUtils.startActivity(MainActivity.class, null);
+
                     }
 
                     @Override

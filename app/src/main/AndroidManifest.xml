@@ -21,7 +21,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".modules.main.MainActivity" />
         <activity
             android:name=".modules.splash.SplashAcivity"
             android:theme="@style/FullScreen_Theme">
@@ -31,6 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".modules.main.MainActivity" />
         <activity android:name=".modules.login.LoginActivity" />
         <activity android:name=".modules.home.activitys.HomeDetailAcivity" />
     </application>
