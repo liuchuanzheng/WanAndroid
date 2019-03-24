@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.ToastUtils;
 import com.liuchuanzheng.wanandroid.R;
 import com.liuchuanzheng.wanandroid.base.BaseMVPActivity;
+import com.liuchuanzheng.wanandroid.modules.demo.fragments.DemoFragment;
 import com.liuchuanzheng.wanandroid.modules.gzh.GzhFragment;
 import com.liuchuanzheng.wanandroid.modules.home.HomeFragment;
 import com.liuchuanzheng.wanandroid.modules.main.adapter.MyMainPagerAdapter;
@@ -112,7 +113,7 @@ public class MainActivity extends BaseMVPActivity<IContract.main.View, MainActiv
         fragmentList.add(HomeFragment.getInstance());
         fragmentList.add(SystemFragment.getInstance());
         fragmentList.add(GzhFragment.getInstance());
-        fragmentList.add(new MineFragment());
+        fragmentList.add(DemoFragment.getInstance());
         fragmentList.add(new MineFragment());
         MyMainPagerAdapter myMainPagerAdapter = new MyMainPagerAdapter(getSupportFragmentManager(), fragmentList);
         vp.setAdapter(myMainPagerAdapter);

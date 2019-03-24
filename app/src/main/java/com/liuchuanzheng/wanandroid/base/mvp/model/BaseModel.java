@@ -1,5 +1,7 @@
 package com.liuchuanzheng.wanandroid.base.mvp.model;
 
+import com.liuchuanzheng.wanandroid.modules.demo.beans.DemoDetailResponseBean;
+import com.liuchuanzheng.wanandroid.modules.demo.beans.DemoTitlesResponseBean;
 import com.liuchuanzheng.wanandroid.modules.gzh.beans.GzhDetailResponseBean;
 import com.liuchuanzheng.wanandroid.modules.gzh.beans.TitlesResponseBean;
 import com.liuchuanzheng.wanandroid.modules.home.beans.BannerResponseBean;
@@ -81,6 +83,26 @@ public class BaseModel implements IBaseModel {
         public Observable<GzhDetailResponseBean> getWXDetailList(int page, int id) {
             Observable<GzhDetailResponseBean> observable = RetrofitManager.create(ApiService.class)
                     .getWXDetailList(page, id)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread());
+            return observable;
+
+        }
+    }
+
+    public class Demo {
+        public Observable<DemoTitlesResponseBean> getTitleList() {
+            Observable<DemoTitlesResponseBean> observable = RetrofitManager.create(ApiService.class)
+                    .getDemoTitleList()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread());
+            return observable;
+
+        }
+
+        public Observable<DemoDetailResponseBean> getDetailList(int page, int id) {
+            Observable<DemoDetailResponseBean> observable = RetrofitManager.create(ApiService.class)
+                    .getDemoDetailList(page, id)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread());
             return observable;

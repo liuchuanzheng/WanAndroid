@@ -1,5 +1,7 @@
 package com.liuchuanzheng.wanandroid.net;
 
+import com.liuchuanzheng.wanandroid.modules.demo.beans.DemoDetailResponseBean;
+import com.liuchuanzheng.wanandroid.modules.demo.beans.DemoTitlesResponseBean;
 import com.liuchuanzheng.wanandroid.modules.gzh.beans.GzhDetailResponseBean;
 import com.liuchuanzheng.wanandroid.modules.gzh.beans.TitlesResponseBean;
 import com.liuchuanzheng.wanandroid.modules.home.beans.BannerResponseBean;
@@ -13,6 +15,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by lw on 2018/1/23.
@@ -57,5 +60,17 @@ public interface ApiService {
      */
     @GET("wxarticle/list/{id}/{page}/json")
     Observable<GzhDetailResponseBean> getWXDetailList(@Path("page") int page, @Path("id") int id);
+
+    /**
+     * 获取项目 列表
+     */
+    @GET("project/tree/json")
+    Observable<DemoTitlesResponseBean> getDemoTitleList();
+
+    /**
+     * 获取 项目详细信息列表数据
+     */
+    @GET("project/list/{page}/json")
+    Observable<DemoDetailResponseBean> getDemoDetailList(@Path("page") int page, @Query("cid") int id);
 
 }
