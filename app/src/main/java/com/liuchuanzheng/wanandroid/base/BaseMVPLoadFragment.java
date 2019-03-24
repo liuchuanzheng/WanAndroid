@@ -29,4 +29,13 @@ public abstract class BaseMVPLoadFragment<T extends IBaseRetrofitView, K extends
      * 创建presenter
      */
     protected abstract void initMVP();
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mPresenter != null) {
+            mPresenter.detachView();
+            mPresenter = null;
+        }
+    }
 }

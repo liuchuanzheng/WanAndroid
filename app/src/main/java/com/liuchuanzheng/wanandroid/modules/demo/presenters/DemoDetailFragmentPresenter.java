@@ -37,6 +37,10 @@ public class DemoDetailFragmentPresenter extends BasePresenter<IContract.main_de
 
             @Override
             public void onNext(DemoDetailResponseBean responseBean) {
+                if (mView == null) {
+                    //说明view已经销毁了,没必要再去显示了.也防止了空指针.
+                    return;
+                }
                 if (responseBean.getErrorCode() == 0) {
                     if (responseBean.getData() == null) {
                         mView.onGetDetail(responseBean, IBaseView.SERVER_NORMAL_DATANO, context.getString(R.string.data_null), isRefresh);
@@ -50,12 +54,20 @@ public class DemoDetailFragmentPresenter extends BasePresenter<IContract.main_de
 
             @Override
             public void onError(Throwable e) {
+                if (mView == null) {
+                    //说明view已经销毁了,没必要再去显示了.也防止了空指针.
+                    return;
+                }
                 mView.onGetDetail(null, IBaseView.NET_ERROR, e.toString(), isRefresh);
             }
 
             @Override
             public void onComplete() {
-
+                if (mView == null) {
+                    //说明view已经销毁了,没必要再去显示了.也防止了空指针.
+                    return;
+                }
+                mView.onComplete();
             }
         });
     }

@@ -20,4 +20,13 @@ public abstract class BaseMVPActivity<T extends IBaseRetrofitView,K extends Base
      * 创建presenter
      */
     protected abstract void initMVP();
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mPresenter != null) {
+            mPresenter.detachView();
+            mPresenter = null;
+        }
+    }
 }

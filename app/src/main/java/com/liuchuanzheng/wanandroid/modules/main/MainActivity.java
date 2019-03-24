@@ -259,7 +259,6 @@ public class MainActivity extends BaseMVPActivity<IContract.main.View, MainActiv
 
     @OnClick(R.id.fab)
     public void onViewClicked() {
-//        ActivityUtils.startActivity(LoginActivity.class, null);
         scrollToTop(lastIndex);
     }
 
@@ -281,6 +280,10 @@ public class MainActivity extends BaseMVPActivity<IContract.main.View, MainActiv
             case 2:
                 GzhFragment gzhFragment = (GzhFragment) fragmentList.get(2);
                 gzhFragment.scrollToTop();
+                break;
+            case 3:
+                DemoFragment demoFragment = (DemoFragment) fragmentList.get(3);
+                demoFragment.scrollToTop();
                 break;
             default:
                 break;
