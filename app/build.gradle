@@ -7,12 +7,12 @@ def dbflow_version = "5.0.0-alpha1"
 
 android {
     signingConfigs {
-        releaseSign {
+        /*releaseSign {
             keyAlias 'liuchuanzheng'
             keyPassword '123456'
             storeFile file('/keys/liuchuanzheng')
             storePassword '123456'
-        }
+        }*/
     }
     compileSdkVersion 27
     defaultConfig {
