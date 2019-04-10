@@ -6,6 +6,14 @@ def dbflow_version = "5.0.0-alpha1"
 // or 10-digit short-hash of a specific commit. (Useful for bugs fixed in develop, but not in a release yet)
 
 android {
+    signingConfigs {
+        releaseSign {
+            keyAlias 'liuchuanzheng'
+            keyPassword '123456'
+            storeFile file('/keys/liuchuanzheng')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.liuchuanzheng.wanandroid"
@@ -26,6 +34,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.releaseSign
         }
     }
     lintOptions {
@@ -34,7 +43,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.0.2'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.android.support:design:27.1.1'
@@ -44,88 +53,129 @@ dependencies {
     implementation 'com.android.support:cardview-v7:27.1.1'
 
     //以下为自引用三方库
+
     //.........................1【start】logger.....................................
+
     //   地址：https://github.com/orhanobut/logger
     implementation 'com.orhanobut:logger:2.2.0'
+
     //.........................1【end】logger.....................................
 
     //.........................2【start】butterknife.....................................
+
     //   地址：https://github.com/JakeWharton/butterknife
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
     //.........................2【end】butterknife.....................................
 
     //.........................3【start】ImmersionBar.....................................
+
     // android 4.4以上沉浸式状态栏和沉浸式导航栏管理，包括状态栏字体颜色，一句代码轻松实现，以及对bar的其他设置
+
     //   地址：implementation 'com.gyf.immersionbar:immersionbar:2.3.3-beta09'
     implementation 'com.gyf.immersionbar:immersionbar:2.3.3-beta09'
+
     //.........................3【end】ImmersionBar.....................................
 
     //.........................4【start】RxAndroid.....................................
+
     //   地址：https://github.com/ReactiveX/RxAndroid
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+
     // Because RxAndroid releases are few and far between, it is recommended you also
+
     // explicitly depend on RxJava's latest version for bug fixes and new features.
+
     // (see https://github.com/ReactiveX/RxJava/releases for latest 2.x.x version)
     implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
+
     //.........................4【end】RxAndroid.....................................
 
     //.........................5【start】RxPermissions.....................................
+
     //   地址：https://github.com/tbruyelle/RxPermissions
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+
     //.........................5【end】RxPermissions.....................................
 
     //.........................6【start】腾讯Bugly.....................................
-    implementation 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
+    implementation 'com.tencent.bugly:crashreport:latest.release'
+
+    //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
+
     //.........................6【end】腾讯Bugly.....................................
 
     //.........................7【start】AndroidUtilCode.....................................
+
     //   地址：https://github.com/Blankj/AndroidUtilCode
     implementation 'com.blankj:utilcode:1.22.0'
+
     //.........................7【end】AndroidUtilCode.....................................
 
     //.........................8【start】retrofit2.....................................
+
     //   地址：https://github.com/Blankj/AndroidUtilCode
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+
     //用到okhttp
     implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+
     //用到gson转换，来配合使用okhttp
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
     //.........................8【end】retrofit2.....................................
 
     //.........................9【start】MagicIndicato.....................................
+
     //   地址：https://github.com/hackware1993/MagicIndicator
     implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
+
     //.........................9【end】MagicIndicato.....................................
 
     //.........................10【start】SmartRefreshLayout.....................................
+
     //   地址：https://github.com/scwang90/SmartRefreshLayout
+
     //1.1.0 API改动过大，老用户升级需谨慎
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-18'
-    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-18'//没有使用特殊Header，可以不加这行
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-18'
+
+    //没有使用特殊Header，可以不加这行
+
     //.........................10【end】SmartRefreshLayout.....................................
+
     //.........................11【start】BaseRecyclerViewAdapterHelper.....................................
+
     //   地址：https://github.com/CymChad/BaseRecyclerViewAdapterHelper
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+
     //.........................11【end】BaseRecyclerViewAdapterHelper.....................................
 
     //.........................12【start】banner.....................................
+
     //   地址：https://github.com/youth5201314/banner
-    implementation  'com.youth.banner:banner:1.4.10'
+    implementation 'com.youth.banner:banner:1.4.10'
+
     //.........................12【end】banner.....................................
+
     //.........................13【start】banner.....................................
+
     //   地址：https://github.com/bumptech/glide
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+
     //.........................13【end】banner.....................................
 
     //.........................14【start】DBFlow.....................................
+
     //   地址：https://github.com/agrosner/DBFlow
+
     // Annotation Processor
+
     // if only using Java, use this. If using Kotlin do NOT use this.
     annotationProcessor "com.github.agrosner.dbflow:processor:${dbflow_version}"
-
 
     // core set of libraries
     implementation "com.github.agrosner.dbflow:core:${dbflow_version}"
@@ -133,29 +183,31 @@ dependencies {
 
     // sql-cipher database encryption (optional)
     implementation "com.github.agrosner.dbflow:sqlcipher:${dbflow_version}"
-    implementation "net.zetetic:android-database-sqlcipher:4.0.1@aar"
+    implementation 'net.zetetic:android-database-sqlcipher:4.0.1@aar'
 
     // RXJava 2 support
     implementation "com.github.agrosner.dbflow:reactive-streams:${dbflow_version}"
-
 
     // Android Architecture Components Paging Library Support
     implementation "com.github.agrosner.dbflow:paging:${dbflow_version}"
 
     // adds generated content provider annotations + support.
     implementation "com.github.agrosner.dbflow:contentprovider:${dbflow_version}"
+
     //.........................14【end】DBFlow.....................................
 
     //.........................15【start】AgentWeb.....................................
+
     //   地址：https://github.com/Justson/AgentWeb
-    implementation  'com.just.agentweb:agentweb:4.0.2'
+    implementation 'com.just.agentweb:agentweb:4.0.2'
+
     //.........................15【end】AgentWeb.....................................
 
     //.........................16【start】FlycoTabLayout.....................................
+
     //   地址：https://github.com/H07000223/FlycoTabLayout/blob/master/README_CN.md
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+
     //.........................16【end】FlycoTabLayout.....................................
-
-
 }
